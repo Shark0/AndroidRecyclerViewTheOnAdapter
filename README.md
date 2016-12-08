@@ -1,0 +1,26 @@
+# AndroidRecyclerViewTheOnAdapter
+沒有強大的功能，但是這架構的"觀念"很靈活，如果沒有太奇特的需求，基本上整個專案只需要一個TheOneAdapter。
+
+## 概念構想
+一開始是想要將每個不同ViewType物件模組化，讓不同頁面的Adapter可以方便調用不同的ViewType，外加應付需求如雲一般的變化，但是寫到後面誤打誤撞的發現這樣整個專案就只需要一個Adapter來負責排版就好，那Adapter就是TheOneAdapter。
+
+* 優點
+開發者只需要實踐模組化ViewHolder的Interface，就可以在不同頁面隨意調用已經開發好的模組即可，可以輕易調換模組的順序，擴充新的模組
+
+* 缺點
+沒有強大的功能，常用的功能還是要自己做，反正除了我以外大家都很強，對吧?
+
+## 實踐方法
+在TheOneAapter中有個ViewTypeInterface，每個ViewType物件模組只需要實踐以下方法就好
+
+* getItemCount 
+TheOneAdapter用來取得ViewType有幾個Item Count，如果是HeaderViewHolder、LoadingViewHolder之類的回傳1就好，如果是資料列表類的就回傳size或是length
+
+* getLayoutId
+TheOneAdapter用來當作ViewType的唯一碼，順便用來產生ItemView
+
+* getViewHolder
+TheOneAdapter用來取的ViewHolder，ItemView是用ViewType產生
+
+* bindViewHolder
+TheOneAdapter用來通知ViewType模組排版，Index也幫你算好了，如果有點擊事件需要用到Index，就把Index塞到要被點的View Tag。
