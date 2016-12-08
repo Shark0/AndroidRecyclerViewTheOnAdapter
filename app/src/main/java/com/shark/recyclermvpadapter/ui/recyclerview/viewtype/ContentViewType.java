@@ -1,4 +1,4 @@
-package com.shark.recyclermvpadapter.ui.recyclerview.itemtype;
+package com.shark.recyclermvpadapter.ui.recyclerview.viewtype;
 
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
@@ -11,19 +11,19 @@ import com.shark.recyclermvpadapter.ui.recyclerview.TheOneAdapter;
  * Created by Shark0 on 2016/12/8.
  */
 
-public class ContentItemType implements TheOneAdapter.ItemTypeInterface {
+public class ContentViewType implements TheOneAdapter.ViewTypeInterface {
 
-    private ContentItemTypeListener listener;
+    private ContentViewTypeListener listener;
     private int contentSize;
 
 
-    public ContentItemType(ContentItemTypeListener listener, int contentSize) {
+    public ContentViewType(ContentViewTypeListener listener, int contentSize) {
         this.listener = listener;
         this.contentSize = contentSize;
     }
 
     @Override
-    public int getCount() {
+    public int getItemCount() {
         return contentSize;
     }
 
@@ -48,10 +48,10 @@ public class ContentItemType implements TheOneAdapter.ItemTypeInterface {
     }
 
     private class ContentViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
-        private ContentItemTypeListener listener;
+        private ContentViewTypeListener listener;
         private TextView itemTextView;
 
-        public ContentViewHolder(View itemView, ContentItemTypeListener listener) {
+        public ContentViewHolder(View itemView, ContentViewTypeListener listener) {
             super(itemView);
             this.listener = listener;
             itemView.setOnClickListener(this);
@@ -65,7 +65,7 @@ public class ContentItemType implements TheOneAdapter.ItemTypeInterface {
         }
     }
 
-    public interface ContentItemTypeListener {
+    public interface ContentViewTypeListener {
         public void onContentItemClick(int index);
     }
 }

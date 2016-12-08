@@ -1,4 +1,4 @@
-package com.shark.recyclermvpadapter.ui.recyclerview.itemtype;
+package com.shark.recyclermvpadapter.ui.recyclerview.viewtype;
 
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
@@ -11,18 +11,18 @@ import com.shark.recyclermvpadapter.ui.recyclerview.TheOneAdapter;
  * Created by Shark0 on 2016/12/8.
  */
 
-public class ButtonItemType implements TheOneAdapter.ItemTypeInterface {
+public class ButtonViewType implements TheOneAdapter.ViewTypeInterface {
 
-    private ButtonItemTypeListener listener;
+    private ButtonViewTypeListener listener;
     private String buttonText;
 
-    public ButtonItemType(ButtonItemTypeListener listener, String buttonText) {
+    public ButtonViewType(ButtonViewTypeListener listener, String buttonText) {
         this.listener = listener;
         this.buttonText = buttonText;
     }
 
     @Override
-    public int getCount() {
+    public int getItemCount() {
         return 1;
     }
 
@@ -47,10 +47,10 @@ public class ButtonItemType implements TheOneAdapter.ItemTypeInterface {
 
     private class ButtonViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
-        private ButtonItemTypeListener listener;
+        private ButtonViewTypeListener listener;
         private Button button;
 
-        public ButtonViewHolder(View itemView, ButtonItemTypeListener listener) {
+        public ButtonViewHolder(View itemView, ButtonViewTypeListener listener) {
             super(itemView);
             this.listener = listener;
             button = (Button) itemView.findViewById(R.id.adapterButton_button);
@@ -63,7 +63,7 @@ public class ButtonItemType implements TheOneAdapter.ItemTypeInterface {
         }
     }
 
-    public interface ButtonItemTypeListener {
+    public interface ButtonViewTypeListener {
         public void onButtonItemClick();
     }
 }

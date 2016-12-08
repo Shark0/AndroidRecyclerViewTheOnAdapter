@@ -1,4 +1,4 @@
-package com.shark.recyclermvpadapter.ui.recyclerview.itemtype;
+package com.shark.recyclermvpadapter.ui.recyclerview.viewtype;
 
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
@@ -11,16 +11,16 @@ import com.shark.recyclermvpadapter.ui.recyclerview.TheOneAdapter;
  * Created by Shark0 on 2016/12/8.
  */
 
-public class MessageItemType implements TheOneAdapter.ItemTypeInterface {
+public class MessageViewType implements TheOneAdapter.ViewTypeInterface {
 
     private String message;
 
-    public MessageItemType(String message) {
+    public MessageViewType(String message) {
         this.message = message;
     }
 
     @Override
-    public int getCount() {
+    public int getItemCount() {
         return 1;
     }
 

@@ -8,14 +8,14 @@ import android.widget.Toast;
 
 import com.shark.recyclermvpadapter.R;
 import com.shark.recyclermvpadapter.ui.recyclerview.TheOneAdapter;
-import com.shark.recyclermvpadapter.ui.recyclerview.itemtype.ButtonItemType;
-import com.shark.recyclermvpadapter.ui.recyclerview.itemtype.ContentItemType;
-import com.shark.recyclermvpadapter.ui.recyclerview.itemtype.MessageItemType;
+import com.shark.recyclermvpadapter.ui.recyclerview.viewtype.ButtonViewType;
+import com.shark.recyclermvpadapter.ui.recyclerview.viewtype.ContentViewType;
+import com.shark.recyclermvpadapter.ui.recyclerview.viewtype.MessageViewType;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity implements ButtonItemType.ButtonItemTypeListener, ContentItemType.ContentItemTypeListener {
+public class MainActivity extends AppCompatActivity implements ButtonViewType.ButtonViewTypeListener, ContentViewType.ContentViewTypeListener {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,13 +27,13 @@ public class MainActivity extends AppCompatActivity implements ButtonItemType.Bu
     private void bindContentRecyclerView() {
         RecyclerView recyclerView = (RecyclerView) findViewById(R.id.activityMain_contentRecyclerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        List<TheOneAdapter.ItemTypeInterface> itemTypeList = new ArrayList<>();
-        itemTypeList.add(new MessageItemType("This Is Header"));
-        itemTypeList.add(new ContentItemType(this, 10));
-        itemTypeList.add(new MessageItemType("This Is Middle"));
-        itemTypeList.add(new ContentItemType(this, 10));
-        itemTypeList.add(new MessageItemType("This Is Footer"));
-        itemTypeList.add(new ButtonItemType(this, "This is Footer Button"));
+        List<TheOneAdapter.ViewTypeInterface> itemTypeList = new ArrayList<>();
+        itemTypeList.add(new MessageViewType("This Is Header"));
+        itemTypeList.add(new ContentViewType(this, 10));
+        itemTypeList.add(new MessageViewType("This Is Middle"));
+        itemTypeList.add(new ContentViewType(this, 10));
+        itemTypeList.add(new MessageViewType("This Is Footer"));
+        itemTypeList.add(new ButtonViewType(this, "This is Footer Button"));
         recyclerView.setAdapter(new TheOneAdapter(this, itemTypeList));
     }
 

@@ -15,29 +15,29 @@ import java.util.List;
 public class TheOneAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     private Context context;
-    private List<ItemTypeInterface> itemTypeList;
+    private List<ViewTypeInterface> itemTypeList;
 
-    public TheOneAdapter(Context context, List<ItemTypeInterface> itemTypeList) {
+    public TheOneAdapter(Context context, List<ViewTypeInterface> itemTypeList) {
         this.context = context;
         this.itemTypeList = itemTypeList;
     }
 
     @Override
     public int getItemViewType(int position) {
-        ItemTypeInterface itemType = getItemTypeByPosition(position);
+        ViewTypeInterface itemType = getItemTypeByPosition(position);
         return itemType.getLayoutId();
     }
 
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View itemView = LayoutInflater.from(context).inflate(viewType, parent, false);
-        ItemTypeInterface itemType = getItemTypeByViewType(viewType);
+        ViewTypeInterface itemType = getItemTypeByViewType(viewType);
         return itemType.getViewHolder(itemView);
     }
 
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
-        ItemTypeInterface itemType = getItemTypeByPosition(position);
+        ViewTypeInterface itemType = getItemTypeByPosition(position);
         int index = getItemTypeIndexByPosition(position);
         itemType.bindViewHolder(holder, index);
     }
@@ -45,16 +45,16 @@ public class TheOneAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
     @Override
     public int getItemCount() {
         int count = 0;
-        for (ItemTypeInterface itemType: itemTypeList) {
-            count = count + itemType.getCount();
+        for (ViewTypeInterface itemType: itemTypeList) {
+            count = count + itemType.getItemCount();
         }
         return count;
     }
 
-    private ItemTypeInterface getItemTypeByPosition(int position) {
+    private ViewTypeInterface getItemTypeByPosition(int position) {
         int count = 0;
-        for (ItemTypeInterface itemType: itemTypeList) {
-            count = count + itemType.getCount();
+        for (ViewTypeInterface itemType: itemTypeList) {
+            count = count + itemType.getItemCount();
             if(position < count) {
                 return itemType;
             }
@@ -62,8 +62,8 @@ public class TheOneAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
         return null;
     }
 
-    private ItemTypeInterface getItemTypeByViewType(int viewType) {
-        for (ItemTypeInterface itemType: itemTypeList) {
+    private ViewTypeInterface getItemTypeByViewType(int viewType) {
+        for (ViewTypeInterface itemType: itemTypeList) {
             if(itemType.getLayoutId() == viewType) {
                 return itemType;
             }
@@ -73,18 +73,18 @@ public class TheOneAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
 
     private int getItemTypeIndexByPosition(int position) {
         int count = 0;
-        for (ItemTypeInterface itemType: itemTypeList) {
-            count = count + itemType.getCount();
+        for (ViewTypeInterface itemType: itemTypeList) {
+            count = count + itemType.getItemCount();
             if(position < count) {
-                int preItemCount = (count - itemType.getCount());
+                int preItemCount = (count - itemType.getItemCount());
                 return position - preItemCount;
             }
         }
         return -1;
     }
 
-    public static interface ItemTypeInterface {
-        public int getCount();
+    public static interface ViewTypeInterface {
+        public int getItemCount();
         public int getLayoutId();
         public RecyclerView.ViewHolder getViewHolder(View itemView);
         public void bindViewHolder(RecyclerView.ViewHolder viewHolder, int index);
